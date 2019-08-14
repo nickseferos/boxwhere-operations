@@ -1,0 +1,42 @@
+<%= form_with(model: bay, local: true) do |form| %>
+  <% if bay.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(bay.errors.count, "error") %> prohibited this bay from being saved:</h2>
+
+      <ul>
+        <% bay.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :number %>
+    <%= form.number_field :number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bay_size %>
+    <%= form.number_field :bay_size %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bay_cells %>
+    <%= form.number_field :bay_cells %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bay_height %>
+    <%= form.number_field :bay_height %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bay_total_container_number %>
+    <%= form.number_field :bay_total_container_number %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

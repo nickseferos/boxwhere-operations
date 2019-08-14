@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @bay.number %>
+</p>
+
+<p>
+  <strong>Bay size:</strong>
+  <%= @bay.bay_size %>
+</p>
+
+<p>
+  <strong>Bay cells:</strong>
+  <%= @bay.bay_cells %>
+</p>
+
+<p>
+  <strong>Bay height:</strong>
+  <%= @bay.bay_height %>
+</p>
+
+<p>
+  <strong>Bay total container number:</strong>
+  <%= @bay.bay_total_container_number %>
+</p>
+
+<%= link_to 'Edit', edit_bay_path(@bay) %> |
+<%= link_to 'Back', bays_path %>

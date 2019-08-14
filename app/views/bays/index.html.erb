@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Bays</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Number</th>
+      <th>Bay size</th>
+      <th>Bay cells</th>
+      <th>Bay height</th>
+      <th>Bay total container number</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bays.each do |bay| %>
+      <tr>
+        <td><%= bay.number %></td>
+        <td><%= bay.bay_size %></td>
+        <td><%= bay.bay_cells %></td>
+        <td><%= bay.bay_height %></td>
+        <td><%= bay.bay_total_container_number %></td>
+        <td><%= link_to 'Show', bay %></td>
+        <td><%= link_to 'Edit', edit_bay_path(bay) %></td>
+        <td><%= link_to 'Destroy', bay, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Bay', new_bay_path %>

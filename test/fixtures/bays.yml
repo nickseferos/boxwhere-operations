@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: 1
+  bay_size: 1
+  bay_cells: 1
+  bay_height: 1
+  bay_total_container_number: 1
+
+two:
+  number: 1
+  bay_size: 1
+  bay_cells: 1
+  bay_height: 1
+  bay_total_container_number: 1

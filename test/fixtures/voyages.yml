@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  numberin: MyString
+  numberout: MyString
+  eta: 2019-08-14 11:14:29
+  etd: 2019-08-14 11:14:29
+  ata: 2019-08-14 11:14:29
+  atd: 2019-08-14 11:14:29
+  terminal: one
+  vessel: one
+
+two:
+  numberin: MyString
+  numberout: MyString
+  eta: 2019-08-14 11:14:29
+  etd: 2019-08-14 11:14:29
+  ata: 2019-08-14 11:14:29
+  atd: 2019-08-14 11:14:29
+  terminal: two
+  vessel: two

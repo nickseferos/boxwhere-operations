@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Steamship line:</strong>
+  <%= @vessel.steamship_line.name %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @vessel.name %>
+</p>
+
+<p>
+  <strong>Length overall:</strong>
+  <%= @vessel.length_overall %>
+</p>
+
+<%= link_to 'Edit', edit_vessel_path(@vessel) %> |
+<%= link_to 'Back', vessels_path %>

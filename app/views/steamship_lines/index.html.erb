@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Steamship Lines</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @steamship_lines.each do |steamship_line| %>
+      <tr>
+        <td><%= steamship_line.name %></td>
+        <td><%= link_to 'Show', steamship_line %></td>
+        <td><%= link_to 'Edit', edit_steamship_line_path(steamship_line) %></td>
+        <td><%= link_to 'Destroy', steamship_line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Steamship Line', new_steamship_line_path %>

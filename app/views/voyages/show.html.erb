@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Numberin:</strong>
+  <%= @voyage.numberin %>
+</p>
+
+<p>
+  <strong>Numberout:</strong>
+  <%= @voyage.numberout %>
+</p>
+
+<p>
+  <strong>Eta:</strong>
+  <%= @voyage.eta %>
+</p>
+
+<p>
+  <strong>Etd:</strong>
+  <%= @voyage.etd %>
+</p>
+
+<p>
+  <strong>Ata:</strong>
+  <%= @voyage.ata %>
+</p>
+
+<p>
+  <strong>Atd:</strong>
+  <%= @voyage.atd %>
+</p>
+
+<p>
+  <strong>Terminal:</strong>
+  <%= @voyage.terminal.name %>
+</p>
+
+<p>
+  <strong>Vessel:</strong>
+  <%= @voyage.vessel.name %>
+</p>
+
+<%= link_to 'Edit', edit_voyage_path(@voyage) %> |
+<%= link_to 'Back', voyages_path %>
