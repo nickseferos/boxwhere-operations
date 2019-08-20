@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  location: MyString
+  first_crane_operator: MyString
+  second_crane_operator: MyString
+  foreman: MyString
+  shift: one
+
+two:
+  location: MyString
+  first_crane_operator: MyString
+  second_crane_operator: MyString
+  foreman: MyString
+  shift: two

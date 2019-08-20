@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  load_number: MyString
+  discharge_number: MyString
+  start_day_time: 2019-08-14 13:52:33
+  voyage: one
+
+two:
+  load_number: MyString
+  discharge_number: MyString
+  start_day_time: 2019-08-14 13:52:33
+  voyage: two

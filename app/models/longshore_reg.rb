@@ -1,0 +1,2 @@
+class LongshoreReg < ApplicationRecord
+end

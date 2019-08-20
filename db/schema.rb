@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_14_181428) do
+ActiveRecord::Schema.define(version: 2019_08_20_172226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,25 @@ ActiveRecord::Schema.define(version: 2019_08_14_181428) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "gangs", force: :cascade do |t|
+    t.string "location"
+    t.string "first_crane_operator"
+    t.string "second_crane_operator"
+    t.string "foreman"
+    t.bigint "shift_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["shift_id"], name: "index_gangs_on_shift_id"
+  end
+
+  create_table "longshore_regs", force: :cascade do |t|
+    t.string "name"
+    t.string "number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["number"], name: "index_longshore_regs_on_number"
+  end
+
   create_table "ports", force: :cascade do |t|
     t.bigint "state_id", null: false
     t.string "name"
@@ -44,6 +63,17 @@ ActiveRecord::Schema.define(version: 2019_08_14_181428) do
     t.string "role"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "shifts", force: :cascade do |t|
+    t.string "load_number"
+    t.string "discharge_number"
+    t.datetime "start_day_time"
+    t.bigint "voyage_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "dock_foreman"
+    t.index ["voyage_id"], name: "index_shifts_on_voyage_id"
   end
 
   create_table "states", force: :cascade do |t|
@@ -105,11 +135,14 @@ ActiveRecord::Schema.define(version: 2019_08_14_181428) do
     t.bigint "vessel_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "job_number"
     t.index ["terminal_id"], name: "index_voyages_on_terminal_id"
     t.index ["vessel_id"], name: "index_voyages_on_vessel_id"
   end
 
+  add_foreign_key "gangs", "shifts"
   add_foreign_key "ports", "states"
+  add_foreign_key "shifts", "voyages"
   add_foreign_key "states", "countries"
   add_foreign_key "terminals", "ports"
   add_foreign_key "users", "roles"
