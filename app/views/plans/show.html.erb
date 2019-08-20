@@ -1,8 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Voyage:</strong>
-  <%= @plan.voyage_id %>
+  <strong>Plan for:</strong>
+  <%= @plan.voyage.vessel.name %>
+  <%= @plan.voyage.numberout %>
+  Arriving <%= @plan.voyage.eta.to_formatted_s(:long) %>
 </p>
 
 <%= link_to 'Edit', edit_plan_path(@plan) %> |
