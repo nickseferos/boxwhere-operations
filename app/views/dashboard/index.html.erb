@@ -20,9 +20,12 @@
           <td><%= cv.ata.to_formatted_s(:long) %></td>
           <td><%= cv.etd.to_formatted_s(:long) %></td>
           <td><%= cv.terminal.name %></td>
-
-          <td><%= link_to 'View Plan', root_path %></td>
-          <td><%= link_to 'Modify Plan', root_path %></td>
+          <td>
+            <div class="btn-group" role="group">
+            <%= link_to 'View Plan', root_path, class: 'btn btn-outline-primary btn-sm' %>
+            <%= link_to 'Modify Plan', root_path, class: 'btn btn-outline-primary btn-sm' %>
+            </div>
+          </td>
         </tr>
       <% end %>
     <% end %>
@@ -50,7 +53,7 @@
           <td><%= uv.etd.to_formatted_s(:long) %></td>
           <td><%= uv.terminal.name %></td>
 
-          <td><%= button_to 'Begin Vessel Plan', { controller: 'plans', action: 'create', voyage_id: uv.id }, :method=>:post %></td>
+          <td><%= button_to 'Begin Plan', { controller: 'plans', action: 'create', voyage_id: uv.id }, :method=>:post, class: 'btn btn-outline-primary btn-sm' %></td>
         </tr>
       <% end %>
     <% end %>
