@@ -1,0 +1,27 @@
+<h1>Vessel Archives</h1>
+<table>
+  <thead>
+    <tr>
+    <th>Voyage</th>
+    <th>Actual Arrival</th>
+    <th>Actual Sailing</th>
+    <th>Terminal</th>
+    <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @voyages.each do |pv| %>
+      <% if pv.atd.past? %>
+        <tr>
+          <td><%= pv.vessel.name %> <%= pv.numberout %></td>
+          <td><%= pv.ata.to_formatted_s(:long) %></td>
+          <td><%= pv.atd.to_formatted_s(:long) %></td>
+          <td><%= pv.terminal.name %></td>
+
+          <td><%= link_to 'Vessel Recap', new_plan_path %> (if no shift exists)</td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

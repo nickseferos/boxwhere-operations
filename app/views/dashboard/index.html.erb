@@ -1,7 +1,87 @@
-<h1> Welcome <% @current_user.fname %></h1>
+<h1><%= ["Welcome", "Hi", "Hej", "Aloha", "Salve", "Bonjour", "Hola", "Guten Tag", "Annyang", "Ni Hao", "Hallo", "Yasou", "Konnichiwa" ].sample %></h1>
 
+<h3>Current Vessels</h3>
+<table>
+  <thead>
+    <tr>
+    <th>Voyage</th>
+    <th>Actual Arrival</th>
+    <th>Planned Sailing</th>
+    <th>Terminal</th>
+    <th colspan="3"></th>
+    </tr>
+  </thead>
 
+  <tbody>
+    <% @voyages.each do |cv| %>
+      <% if cv.ata.past? && cv.etd.future? %>
+        <tr>
+          <td><%= cv.vessel.name %> <%= cv.numberout %></td>
+          <td><%= cv.ata.to_formatted_s(:long) %></td>
+          <td><%= cv.etd.to_formatted_s(:long) %></td>
+          <td><%= cv.terminal.name %></td>
 
-<%= link_to 'Steamship Lines Administration( eventual dropdown with oprtions)', steamship_lines_path %>
-<%= link_to 'Vessels Administration ( eventual dropdown with oprtions)', vessels_path %>
-<%= link_to 'Voyages Administration ( eventual dropdown with oprtions)', voyages_path %>
+          <td><%= link_to 'View Plan', root_path %></td>
+          <td><%= link_to 'Modify Plan', root_path %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<h3>Upcoming Vessels</h3>
+<table>
+  <thead>
+    <tr>
+    <th>Voyage</th>
+    <th>Estimated Arrival</th>
+    <th>Planned Sailing</th>
+    <th>Terminal</th>
+    <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @voyages.each do |uv| %>
+      <% if uv.eta.future? %>
+        <tr>
+          <td><%= uv.vessel.name %> <%= uv.numberout %></td>
+          <td><%= uv.eta.to_formatted_s(:long) %></td>
+          <td><%= uv.etd.to_formatted_s(:long) %></td>
+          <td><%= uv.terminal.name %></td>
+
+          <td><%= button_to 'Begin Vessel Plan', { controller: 'plans', action: 'create', voyage_id: uv.id }, :method=>:post %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<h3>Previous Vessels</h3>
+<table>
+  <thead>
+    <tr>
+    <th>Voyage</th>
+    <th>Actual Arrival</th>
+    <th>Actual Sailing</th>
+    <th>Terminal</th>
+    <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @voyages.each do |pv| %>
+      <% if pv.atd.past? %>
+        <tr>
+          <td><%= pv.vessel.name %> <%= pv.numberout %></td>
+          <td><%= pv.ata.to_formatted_s(:long) %></td>
+          <td><%= pv.atd.to_formatted_s(:long) %></td>
+          <td><%= pv.terminal.name %></td>
+
+          <td><%= link_to 'Vessel Recap', new_plan_path %> (if no shift exists)</td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<h6>Need vessels from over 4 weeks ago? <%= link_to 'Archives', root_path %></h6>
