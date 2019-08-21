@@ -1,90 +1,124 @@
-<h1><%= ["Welcome", "Hi", "Hej", "Aloha", "Salve", "Bonjour", "Hola", "Guten Tag", "Annyang", "Ni Hao", "Hallo", "Yasou", "Konnichiwa" ].sample %></h1>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Welcome {name}!</h1>
+    <p class="lead">Let's get planning</p>
+  </div>
+</div>
 
-<h3>Current Vessels</h3>
-<table>
-  <thead>
-    <tr>
-    <th>Voyage</th>
-    <th>Actual Arrival</th>
-    <th>Planned Sailing</th>
-    <th>Terminal</th>
-    <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @voyages.each do |cv| %>
-      <% if cv.ata.past? && cv.etd.future? %>
+<nav>
+  <div class="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-current-tab" data-toggle="tab" href="#current" role="tab" aria-controls="nav-home" aria-selected="true">Current Vessels</a>
+    <a class="nav-item nav-link" id="nav-upcoming-tab" data-toggle="tab" href="#upcoming" role="tab" aria-controls="nav-profile" aria-selected="false">Upcoming Vessels</a>
+    <a class="nav-item nav-link" id="nav-previous-tab" data-toggle="tab" href="#previous" role="tab" aria-controls="nav-contact" aria-selected="false">Previous Vessels</a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="current" role="tabpanel" aria-labelledby="nav-current-tab">
+    <h3 class="display-4">Current Vessels</h3>
+    <table class="table table-hover">
+      <thead>
         <tr>
-          <td><%= cv.vessel.name %> <%= cv.numberout %></td>
-          <td><%= cv.ata.to_formatted_s(:long) %></td>
-          <td><%= cv.etd.to_formatted_s(:long) %></td>
-          <td><%= cv.terminal.name %></td>
-          <td>
-            <div class="btn-group" role="group">
-            <%= link_to 'View Plan', root_path, class: 'btn btn-outline-primary btn-sm' %>
-            <%= link_to 'Modify Plan', root_path, class: 'btn btn-outline-primary btn-sm' %>
-            </div>
-          </td>
+        <th>Voyage</th>
+        <th>Actual Arrival</th>
+        <th>Planned Sailing</th>
+        <th>Terminal</th>
+        <th colspan="3"></th>
         </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
+      </thead>
 
-<h3>Upcoming Vessels</h3>
-<table>
-  <thead>
-    <tr>
-    <th>Voyage</th>
-    <th>Estimated Arrival</th>
-    <th>Planned Sailing</th>
-    <th>Terminal</th>
-    <th colspan="3"></th>
-    </tr>
-  </thead>
+      <tbody>
+        <% @voyages.each do |cv| %>
+          <% if cv.ata.past? && cv.etd.future? %>
+            <tr>
+              <td><%= cv.vessel.name %> <%= cv.numberout %></td>
+              <td><%= cv.ata.strftime("%A, %B %d at %H%M") %></td>
+              <td><%= cv.etd.strftime("%A, %B %d at %H%M") %></td>
+              <td><%= cv.terminal.name %></td>
+              <td>
+                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                  <%= link_to 'Add Count', root_path, class: 'btn btn-outline-primary btn-sm' %>
+                  <%= link_to 'View Counts', root_path, class: 'btn btn-outline-primary btn-sm' %>
 
-  <tbody>
-    <% @voyages.each do |uv| %>
-      <% if uv.eta.future? %>
+                  <div class="btn-group" role="group">
+                    <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Vessel Plan
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                      <%= link_to 'View Plan', root_path, class: "dropdown-item" %>
+                      <%= link_to 'Modify Plan', root_path, class: "dropdown-item" %>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="tab-pane fade" id="upcoming" role="tabpanel" aria-labelledby="nav-upcoming-tab">
+    <h3 class="display-4">Upcoming Vessels</h3>
+    <table class="table table-hover">
+      <thead>
         <tr>
-          <td><%= uv.vessel.name %> <%= uv.numberout %></td>
-          <td><%= uv.eta.to_formatted_s(:long) %></td>
-          <td><%= uv.etd.to_formatted_s(:long) %></td>
-          <td><%= uv.terminal.name %></td>
-
-          <td><%= button_to 'Begin Plan', { controller: 'plans', action: 'create', voyage_id: uv.id }, :method=>:post, class: 'btn btn-outline-primary btn-sm' %></td>
+        <th>Voyage</th>
+        <th>Estimated Arrival</th>
+        <th>Planned Sailing</th>
+        <th>Terminal</th>
+        <th colspan="3"></th>
         </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
+      </thead>
 
-<h3>Previous Vessels</h3>
-<table>
-  <thead>
-    <tr>
-    <th>Voyage</th>
-    <th>Actual Arrival</th>
-    <th>Actual Sailing</th>
-    <th>Terminal</th>
-    <th colspan="3"></th>
-    </tr>
-  </thead>
+      <tbody>
+        <% @voyages.each do |uv| %>
+          <% if uv.eta.future? %>
+            <tr>
+              <td><%= uv.vessel.name %> <%= uv.numberout %></td>
+              <td><%= uv.eta.strftime("%A, %B %d at %H%M") %></td>
+              <td><%= uv.etd.strftime("%A, %B %d at %H%M") %></td>
+              <td><%= uv.terminal.name %></td>
 
-  <tbody>
-    <% @voyages.each do |pv| %>
-      <% if pv.atd.past? %>
+              <td><%= button_to 'Begin Plan', { controller: 'plans', action: 'create', voyage_id: uv.id }, :method=>:post, class: 'btn btn-outline-primary btn-sm' %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="tab-pane fade" id="previous" role="tabpanel" aria-labelledby="nav-previous-tab">
+    <h3 class="display-4">Previous Vessels</h3>
+    <table class="table table-hover">
+      <thead>
         <tr>
-          <td><%= pv.vessel.name %> <%= pv.numberout %></td>
-          <td><%= pv.ata.to_formatted_s(:long) %></td>
-          <td><%= pv.atd.to_formatted_s(:long) %></td>
-          <td><%= pv.terminal.name %></td>
-
-          <td><%= link_to 'Vessel Recap', new_plan_path %> (if no shift exists)</td>
+        <th>Voyage</th>
+        <th>Actual Arrival</th>
+        <th>Actual Sailing</th>
+        <th>Terminal</th>
+        <th colspan="3"></th>
         </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
-<h6>Need vessels from over 4 weeks ago? <%= link_to 'Archives', root_path %></h6>
+      </thead>
+
+      <tbody>
+        <% @voyages.each do |pv| %>
+          <% if pv.atd.past? %>
+            <tr>
+              <td><%= pv.vessel.name %> <%= pv.numberout %></td>
+              <td><%= pv.ata.strftime("%A %B %d, %Y at %H%M") %></td>
+              <td><%= pv.atd.strftime("%A %B %d, %Y at %H%M") %></td>
+              <td><%= pv.terminal.name %></td>
+
+              <td><%= link_to 'Vessel Recap', new_plan_path %> (if no shift exists)</td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <h6 class="text-muted">Need vessels from over 4 weeks ago? <%= link_to 'Visit the Archives', root_path %></h6>
+  </div>
+</div>
+
+<script>
+  $(function () {
+    $('#myTab li:last-child a').tab('show')
+  })
+</script>

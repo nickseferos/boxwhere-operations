@@ -10,7 +10,7 @@ class DashboardController < ApplicationController
   end
 
   def archive
-    @voyages = Voyage.all.where.ata.past
+    @voyages = Voyage.where("ata <= ?", DateTime.now)
     @vessels = Vessel.all
     @terminals = Terminal.all
     @ports = Port.all

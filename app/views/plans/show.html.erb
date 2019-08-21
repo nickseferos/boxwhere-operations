@@ -1,9 +1,23 @@
-<p>
-  <strong>Plan for:</strong>
-  <%= @plan.voyage.vessel.name %>
-  <%= @plan.voyage.numberout %>
-  Arriving <%= @plan.voyage.eta.to_formatted_s(:long) %>
-</p>
-
-<%= link_to 'Edit', edit_plan_path(@plan) %> |
-<%= link_to 'Back', plans_path %>
+<div class="jumbotron">
+  <h1 class="display-4">Here's the plan for the <strong> <%= @plan.voyage.vessel.name %> <%= @plan.voyage.numberout %></strong></h1>
+  <p class="lead">
+    <% if @plan.voyage.eta.future? %>
+      Scheduled to arrive <%= @plan.voyage.eta.strftime("%A %B, %d at %H%M") %>
+    <% elsif @plan.voyage.ata.past? %>
+      Which arrived <%= @plan.voyage.ata.strftime("%A %B, %d at %H%M") %>
+    <% end %>
+    and
+    <% if @plan.voyage.etd.future? %>
+      scheduled to sail on <%= @plan.voyage.etd.strftime("%A %B, %d at %H%M")%>
+    <% elsif @plan.voyage.atd.past? %>
+      sailed on <%= @plan.voyage.atd.strftime("%A %B, %d at %H%M")%>
+    <% end %>.
+  </p>
+  <hr class="my-4">
+  <p>There are {number} discharges, {number} loads, for {totalnumber} total moves. {number} shifts and {number} total gangs.</p>
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <%= link_to 'Modify', edit_plan_path(@plan), class: 'btn btn-outline-primary' %>
+    <%= link_to 'Share', edit_plan_path(@plan), class: 'btn btn-outline-success' %>
+    <%= link_to 'Back', root_path, class: 'btn btn-outline-secondary' %>
+  </div>
+</div>
