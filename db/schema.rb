@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_20_172226) do
+ActiveRecord::Schema.define(version: 2019_08_27_144718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,13 @@ ActiveRecord::Schema.define(version: 2019_08_20_172226) do
     t.index ["number"], name: "index_longshore_regs_on_number"
   end
 
+  create_table "plans", force: :cascade do |t|
+    t.bigint "voyage_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["voyage_id"], name: "index_plans_on_voyage_id"
+  end
+
   create_table "ports", force: :cascade do |t|
     t.bigint "state_id", null: false
     t.string "name"
@@ -73,6 +80,8 @@ ActiveRecord::Schema.define(version: 2019_08_20_172226) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "dock_foreman"
+    t.bigint "plan_id", null: false
+    t.index ["plan_id"], name: "index_shifts_on_plan_id"
     t.index ["voyage_id"], name: "index_shifts_on_voyage_id"
   end
 
@@ -141,7 +150,9 @@ ActiveRecord::Schema.define(version: 2019_08_20_172226) do
   end
 
   add_foreign_key "gangs", "shifts"
+  add_foreign_key "plans", "voyages"
   add_foreign_key "ports", "states"
+  add_foreign_key "shifts", "plans"
   add_foreign_key "shifts", "voyages"
   add_foreign_key "states", "countries"
   add_foreign_key "terminals", "ports"

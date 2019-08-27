@@ -1,3 +1,3 @@
 class Shift < ApplicationRecord
-  belongs_to :voyage
+  belongs_to :voyage, optional: false
 end

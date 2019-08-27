@@ -1,9 +1,5 @@
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Welcome {name}!</h1>
-    <p class="lead">Let's get planning</p>
-  </div>
-</div>
+<h1 class="display-4 mx-auto">Welcome {name}!</h1>
+<p class="lead">Let's get planning</p>
 
 <nav>
   <div class="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
@@ -45,7 +41,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                       <%= link_to 'View Plan', root_path, class: "dropdown-item" %>
-                      <%= link_to 'Modify Plan', root_path, class: "dropdown-item" %>
+                      <%= link_to 'Modify Plan', edit_plan_path(@plan), class: "dropdown-item" %>
                     </div>
                   </div>
                 </div>

@@ -15,6 +15,7 @@ class PlansController < ApplicationController
   # GET /plans/new
   def new
     @plan = Plan.new
+    @plan.shifts.build
   end
 
   # GET /plans/1/edit
@@ -28,8 +29,8 @@ class PlansController < ApplicationController
 
     respond_to do |format|
       if @plan.save
-        format.html { redirect_to @plan, notice: 'Plan was successfully created.' }
-        format.json { render :show, status: :created, location: @plan }
+        format.html { redirect_to edit_plan_path(@plan), notice: 'Plan was successfully created.' }
+        format.json { render :edit, status: :created, location: @plan }
       else
         format.html { render :new }
         format.json { render json: @plan.errors, status: :unprocessable_entity }
@@ -69,6 +70,6 @@ class PlansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plan_params
-      params.permit(:voyage_id)
+      params.permit(:voyage_id, :shifts_attributes [:load_number, :discharge_number, :start_day_time])
     end
 end

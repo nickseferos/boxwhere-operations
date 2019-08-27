@@ -1,62 +1,53 @@
 <%= form_with(model: voyage, local: true) do |form| %>
-  <% if voyage.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(voyage.errors.count, "error") %> prohibited this voyage from being saved:</h2>
-
-      <ul>
-        <% voyage.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="vessel_id">Vessel</label>
+      <%= form.collection_select(:vessel_id, @vessels, :id, :name, include_blank: true, class: 'form-control') %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :numberin %>
-    <%= form.text_field :numberin %>
+    <div class="form-group col-md-1">
+      <label for="voyagein">Voyage Number In</label>
+      <%= form.text_field :numberin, class: 'form-control', placeholder: "014E" %>
+    </div>
+    <div class="form-group col-md-1">
+      <label for="numberout">Voyage Number Out</label>
+      <%= form.text_field :numberout, class: 'form-control', placeholder: "015W" %>
+    </div>
   </div>
+  <div class="form-row">
 
-  <div class="field">
-    <%= form.label :numberout %>
-    <%= form.text_field :numberout %>
+    <div class="form-group col-md-6">
+      <label for="eta">Estimated Arrival</label>
+      <%= form.datetime_select :eta, class: 'form-control'%>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputAddress2">Sail Board (ETD)</label>
+      <%= form.datetime_select :etd, class: 'form-control' %>
+    </div>
   </div>
+  <div class="form-row">
 
-  <div class="field">
-    <%= form.label :eta %>
-    <%= form.datetime_select :eta %>
+    <div class="form-group col-md-6">
+      <label for="eta">Actual Arrival</label>
+      <%= form.datetime_select :ata, class: 'form-control' %>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputAddress2">Actual Sailing</label>
+      <%= form.datetime_select :atd, class: 'form-control' %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :etd %>
-    <%= form.datetime_select :etd %>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">Terminal</label>
+      <%= form.collection_select(:terminal_id, @terminals, :id, :name, include_blank: true, class: 'form-control')%>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">Job Number</label>
+      <%= form.text_field :job_number, class: 'form-control' %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :ata %>
-    <%= form.datetime_select :ata %>
-  </div>
-
-  <div class="field">
-    <%= form.label :atd %>
-    <%= form.datetime_select :atd %>
-  </div>
-
-  <div class="field">
-    <%= form.label :terminal_id %>
-    <%= form.collection_select(:terminal_id, @terminals, :id, :name, include_blank: true)%>
-  </div>
-
-  <div class="field">
-    <%= form.label :vessel_id %>
-    <%= form.collection_select(:vessel_id, @vessels, :id, :name, include_blank: true)%>
-  </div>
-
-  <div class="field">
-    <%= form.label :job_number %>
-    <%= form.text_field :job_number %>
-  </div>
-
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-primary' %>
   </div>
+</form>
 <% end %>

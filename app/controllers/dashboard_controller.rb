@@ -6,7 +6,7 @@ class DashboardController < ApplicationController
     @ports = Port.all
     @shifts = Shift.all
     @gangs = Gang.all
-    # @plans = Plan.find(params[:voyage_id])
+    @plans = Plan.all
   end
 
   def archive

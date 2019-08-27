@@ -1,6 +1,11 @@
-<h1>Editing Voyage</h1>
+<div class="container">
+<h1>Editing Voyage <%= @voyage.vessel.name %> <%= @voyage.numberout %></h1>
+
+
+
 
 <%= render 'form', voyage: @voyage %>
 
 <%= link_to 'Show', @voyage %> |
 <%= link_to 'Back', voyages_path %>
+</div>
