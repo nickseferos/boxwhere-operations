@@ -1,11 +1,26 @@
+<nav>
+  <div class="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-cargo-tab" data-toggle="tab" href="#cargo" role="tab" aria-controls="nav-home" aria-selected="true">Cargo Plan</a>
+    <a class="nav-item nav-link" id="nav-labor-tab" data-toggle="tab" href="#labor" role="tab" aria-controls="nav-profile" aria-selected="false">Labor Plan</a>
+  </div>
+</nav>
+
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="cargo" role="tabpanel" aria-labelledby="nav-cargo-tab">
+    <h3 class="display-4">Cargo Planning</h3>
+
+  </div>
+
+  <div class="tab-pane fade show active" id="labor" role="tabpanel" aria-labelledby="nav-labor-tab">
+    <h3 class="display-4">Labor Planning</h3>
+
+  </div>
+</div>
 <%= form_with(model: plan, local: true) do |form| %>
   <div class="field">
     <%= form.hidden_field :voyage_id %>
   </div>
   <%= form.fields_for :shifts do |s| %>
-  <select class="form-control">
-<option>Shift start</option>
-</select>
 
   <% end %>
   <div class="actions">

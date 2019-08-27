@@ -8,6 +8,18 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
+import $ from 'jquery'
+import jQuery from 'jquery'
+import { cocoonInitializer } from 'cocoon/app/assets/javascripts/cocoon'
+
+// to initialize cocoon ...
+cocoonInitializer($, jQuery)
+
+// to catch events from cocoon ...
+$(document).on('cocoon:after-insert', () => {
+    // ...
+})
+
 import "bootstrap"
 
 document.addEventListener("turbolinks:load", () => {

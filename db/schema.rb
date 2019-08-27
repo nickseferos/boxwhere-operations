@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_144718) do
+ActiveRecord::Schema.define(version: 2019_08_27_153336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 2019_08_27_144718) do
     t.integer "bay_total_container_number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "vessel_id", null: false
+    t.index ["vessel_id"], name: "index_bays_on_vessel_id"
   end
 
   create_table "countries", force: :cascade do |t|
@@ -149,6 +151,7 @@ ActiveRecord::Schema.define(version: 2019_08_27_144718) do
     t.index ["vessel_id"], name: "index_voyages_on_vessel_id"
   end
 
+  add_foreign_key "bays", "vessels"
   add_foreign_key "gangs", "shifts"
   add_foreign_key "plans", "voyages"
   add_foreign_key "ports", "states"

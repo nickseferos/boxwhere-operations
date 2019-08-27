@@ -16,6 +16,7 @@ class VesselsController < ApplicationController
   def new
     @vessel = Vessel.new
     @steamship_lines = SteamshipLine.all
+    3.times { @vessel.bays.build }
   end
 
   # GET /vessels/1/edit
@@ -71,6 +72,6 @@ class VesselsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def vessel_params
-      params.require(:vessel).permit(:steamship_line_id, :name, :length_overall)
+      params.require(:vessel).permit(:steamship_line_id, :name, :length_overall, bays_attributes: [:vessel_id, :id, :number, :bay_size, :bay_cells, :bay_height, :bay_total_container_number, :_destroy])
     end
 end

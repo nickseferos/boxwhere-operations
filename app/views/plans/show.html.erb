@@ -1,5 +1,5 @@
 <div class="jumbotron">
-  <h1 class="display-4">Here's the plan for the <strong> <%= @plan.voyage.vessel.name %> <%= @plan.voyage.numberout %></strong></h1>
+  <h1 class="display-4">Here's the plan for the <strong> <%= @plan.voyage.vessel.name %> <%= @plan.voyage.numberout %></strong> <h6><%= link_to 'Update', root_path, class: 'text-decoration-none' %></h6></h1>
   <p class="lead">
     <% if @plan.voyage.eta.future? %>
       Scheduled to arrive <%= @plan.voyage.eta.strftime("%A %B, %d at %H%M") %>

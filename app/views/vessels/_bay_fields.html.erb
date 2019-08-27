@@ -1,0 +1,27 @@
+<div class='nested-fields'>
+  <div class="field">
+    <%= f.label :number %>
+    <%= f.number_field :number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :bay_size %>
+    <%= f.number_field :bay_size %>
+  </div>
+
+  <div class="field">
+    <%= f.label :bay_cells %>
+    <%= f.number_field :bay_cells %>
+  </div>
+
+  <div class="field">
+    <%= f.label :bay_height %>
+    <%= f.number_field :bay_height %>
+  </div>
+
+  <div class="field">
+    <%= f.label :bay_total_container_number %>
+    <%= f.number_field :bay_total_container_number %>
+  </div>
+  <%= link_to_remove_association "remove bay", f %>
+</div>
