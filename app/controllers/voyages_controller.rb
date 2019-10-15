@@ -4,7 +4,7 @@ class VoyagesController < ApplicationController
   # GET /voyages
   # GET /voyages.json
   def index
-    @voyages = Voyage.all
+    @voyages = Voyage.all.where(departed: false).order(eta: :desc)
   end
 
   # GET /voyages/1
@@ -79,6 +79,6 @@ class VoyagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def voyage_params
-      params.require(:voyage).permit(:job_number, :numberin, :numberout, :eta, :etd, :ata, :atd, :terminal_id, :vessel_id)
+      params.require(:voyage).permit(:job_number, :numberin, :numberout, :eta, :etd, :ata, :atd, :terminal_id, :vessel_id, :departed)
     end
 end

@@ -1,14 +1,12 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @longshore_reg.name %>
-</p>
-
-<p>
-  <strong>Number:</strong>
-  <%= @longshore_reg.number %>
-</p>
-
-<%= link_to 'Edit', edit_longshore_reg_path(@longshore_reg) %> |
-<%= link_to 'Back', longshore_regs_path %>
+<div class="jumbotron">
+  <h1 class="display-4">History &amp; Performance for <strong> <%= @longshore_reg.name %> <%= @longshore_reg.number %></strong></h1>
+  <p class="lead">
+    TEXT
+  </p>
+  <hr class="my-4">
+  <p>ANALYTICS OVERVIEW</p>
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <%= link_to 'Edit Info', edit_longshore_reg_path(@longshore_reg), class: 'btn btn-outline-secondary' %>
+    <%= link_to 'All Crane Operators', longshore_regs_path, class: 'btn btn-outline-primary' %>
+  </div>
+</div>

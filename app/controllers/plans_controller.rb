@@ -70,6 +70,8 @@ class PlansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plan_params
-      params.permit(:voyage_id, :shifts_attributes [:load_number, :discharge_number, :start_day_time])
+      params.permit(:voyage_id, shifts_attributes: [
+        :load_number, :discharge_number
+      ])
     end
 end

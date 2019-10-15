@@ -28,14 +28,11 @@
     <ul class="navbar-nav mr-auto">
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Voyages &amp; Vessels
+        Analyitics
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <%= link_to 'Add a Voyage', new_voyage_path, class: "dropdown-item" %>
-        <%= link_to 'All Voyages', voyages_path, class: "dropdown-item" %>
-        <div class="dropdown-divider"></div>
-        <%= link_to 'Add a Vessel', new_vessel_path, class: "dropdown-item" %>
-        <%= link_to 'All Vessels', vessels_path, class: "dropdown-item" %>
+        <%= link_to 'Crane Operators', longshore_regs_path, class: "dropdown-item" %>
+        <%= link_to 'Terminal Productivity', longshore_regs_path, class: "dropdown-item" %>
       </div>
     </li>
     </ul>

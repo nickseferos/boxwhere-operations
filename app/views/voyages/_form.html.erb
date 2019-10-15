@@ -45,6 +45,10 @@
       <label for="inputZip">Job Number</label>
       <%= form.text_field :job_number, class: 'form-control' %>
     </div>
+    <div class="custom-control custom-switch">
+      <%= form.check_box :departed, class: 'custom-control-input', id: 'customSwitch1' %>
+      <label class="custom-control-label" for="customSwitch1">Vessel Departed</label>
+    </div>
   </div>
   <div class="actions">
     <%= form.submit class: 'btn btn-primary' %>

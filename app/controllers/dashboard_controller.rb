@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   def index
-    @voyages = Voyage.all.where(eta: 4.weeks.ago..2.weeks.from_now)
+    @voyages = Voyage.all.where(eta: 4.weeks.ago..2.weeks.from_now).order(eta: :desc).reverse
     @vessels = Vessel.all
     @terminals = Terminal.all
     @ports = Port.all

@@ -1,42 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Voyages</h1>
+<div class=''><h1>Voyages</h1> <%= link_to 'Add Voyage', new_voyage_path, class: 'btn btn-outline-primary btn-large' %></div>
 
-<table>
+<table class='table table-hover'>
   <thead>
     <tr>
-      <th>Vessel</th>
-      <th>Number In</th>
-      <th>Number Out</th>
-      <th>Eta</th>
-      <th>Etd</th>
-      <th>Ata</th>
-      <th>Atd</th>
       <th>Terminal</th>
+      <th>Vessel</th>
+      <th>Voyage Out</th>
+      <th>Estimated Arrival</th>
+      <th>Estimated Departure</th>
+      <th>Actual Arival</th>
       <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @voyages.each do |voyage| %>
+      <% if voyage.departed == false %>
       <tr>
+        <td><%= voyage.terminal.name %></td>
         <td><%= voyage.vessel.name %></td>
-        <td><%= voyage.numberin %></td>
         <td><%= voyage.numberout %></td>
         <td><%= voyage.eta %></td>
         <td><%= voyage.etd %></td>
         <td><%= voyage.ata %></td>
-        <td><%= voyage.atd %></td>
-        <td><%= voyage.terminal.name %></td>
 
-        <td><%= link_to 'Show', voyage %></td>
-        <td><%= link_to 'Edit', edit_voyage_path(voyage) %></td>
-        <td><%= link_to 'Destroy', voyage, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><div class="btn-group" role="group" aria-label="Basic example">
+          <%= link_to 'Show', voyage, class: 'btn btn-outline-secondary' %>
+          <%= link_to 'Edit', edit_voyage_path(voyage), class: 'btn btn-outline-primary' %>
+          <%= link_to 'Destroy', voyage, method: :delete, data: { confirm: 'Are you sure you want to delete this voyage and any plans, counts and crane operator performance associated with this voyage?' }, class: 'btn btn-outline-danger' %></div></td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Voyage', new_voyage_path %>
+<%= link_to 'View Departed Voyages FIX!', root_path, class: 'btn btn-outline-secondary btn-large' %>

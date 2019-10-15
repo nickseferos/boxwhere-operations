@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_153336) do
+ActiveRecord::Schema.define(version: 2019_10_15_010713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,6 +147,8 @@ ActiveRecord::Schema.define(version: 2019_08_27_153336) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "job_number"
+    t.boolean "departed"
+    t.index ["job_number"], name: "index_voyages_on_job_number"
     t.index ["terminal_id"], name: "index_voyages_on_terminal_id"
     t.index ["vessel_id"], name: "index_voyages_on_vessel_id"
   end

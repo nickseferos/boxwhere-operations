@@ -24,7 +24,7 @@
 
       <tbody>
         <% @voyages.each do |cv| %>
-          <% if cv.ata.past? && cv.etd.future? %>
+          <% if cv.ata.past? && cv.departed == false %>
             <tr>
               <td><%= cv.vessel.name %> <%= cv.numberout %></td>
               <td><%= cv.ata.strftime("%A, %B %d at %H%M") %></td>
@@ -74,7 +74,11 @@
               <td><%= uv.etd.strftime("%A, %B %d at %H%M") %></td>
               <td><%= uv.terminal.name %></td>
 
-              <td><%= button_to 'Begin Plan', { controller: 'plans', action: 'create', voyage_id: uv.id }, :method=>:post, class: 'btn btn-outline-primary btn-sm' %></td>
+              <td><% if uv.plans.blank? %>
+                    <%= button_to 'Begin Plan', { controller: 'plans', action: 'create', voyage_id: uv.id }, :method=>:post, class: 'btn btn-outline-primary btn-sm' %>
+                    <% else %>
+                    <%= button_to 'FIX! View Plan', class: 'btn btn-outline-primary btn-sm' %>
+                  <% end %></td>
             </tr>
           <% end %>
         <% end %>
@@ -96,7 +100,6 @@
 
       <tbody>
         <% @voyages.each do |pv| %>
-          <% if pv.atd.past? %>
             <tr>
               <td><%= pv.vessel.name %> <%= pv.numberout %></td>
               <td><%= pv.ata.strftime("%A %B %d, %Y at %H%M") %></td>
@@ -105,7 +108,6 @@
 
               <td><%= link_to 'Vessel Recap', new_plan_path %> (if no shift exists)</td>
             </tr>
-          <% end %>
         <% end %>
       </tbody>
     </table>
